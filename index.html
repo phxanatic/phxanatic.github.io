@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Albania — Land of the Eagle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0d0d0d;
+      --white:   #f7f4ef;
+      --mid:     #e8e3da;
+      --muted:   #888077;
+      --red:     #c0392b;
+      --rule:    #d0c9be;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAVIGATION ───────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 4rem;
+      height: 56px;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .hero {
+      padding-top: 56px; /* nav height */
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .hero-text {
+      padding: 8rem 4rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .hero-kicker {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 40ch;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 3px;
+      width: fit-content;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-link:hover { color: var(--red); border-color: var(--red); }
+
+    .hero-panel {
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative grid lines on the dark panel */
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-panel-inner { position: relative; z-index: 1; }
+
+    .hero-panel-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 12vw, 11rem);
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      position: absolute;
+      top: 3rem; right: 3rem;
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    .hero-panel-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .hero-panel-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      font-weight: 400;
+      color: #e8e3da;
+      line-height: 1.4;
+      max-width: 28ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-panel-attr {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #5a5248;
+    }
+
+    /* ─── SECTION SCAFFOLDING ──────────────────────── */
+    section { padding: 7rem 4rem; }
+
+    .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0 4rem;
+    }
+
+    /* ─── ABOUT ────────────────────────────────────── */
+    #about {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 6rem;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-sidebar {}
+
+    .about-sidebar .heading { margin-bottom: 2rem; }
+
+    .about-meta {
+      margin-top: 3rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .about-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 0.85rem;
+    }
+
+    .about-meta-row span:first-child {
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .about-meta-row span:last-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+    }
+
+    .about-body p {
+      font-size: 1.05rem;
+      color: #3a3530;
+      margin-bottom: 1.5rem;
+      max-width: 62ch;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ─── HIGHLIGHTS ───────────────────────────────── */
+    #highlights {
+      background: var(--black);
+      color: var(--white);
+      padding: 7rem 4rem;
+    }
+
+    #highlights .label { color: var(--red); }
+
+    .highlights-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+    }
+
+    .highlights-header p {
+      font-size: 1rem;
+      color: #888077;
+      max-width: 44ch;
+    }
+
+    .highlights-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #2a2520;
+      border-left: 1px solid #2a2520;
+    }
+
+    .highlight-item {
+      padding: 2.5rem 2rem 2.5rem;
+      border-right: 1px solid #2a2520;
+      border-bottom: 1px solid #2a2520;
+    }
+
+    .highlight-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      color: #3a3530;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+    }
+
+    .highlight-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .highlight-body {
+      font-size: 0.9rem;
+      color: #7a7068;
+      line-height: 1.8;
+    }
+
+    /* ─── FACTS ────────────────────────────────────── */
+    #facts {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+    }
+
+    .stats-list {
+      list-style: none;
+      border-top: 1px solid var(--rule);
+      margin-top: 2rem;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .stat-label strong {
+      display: block;
+      color: var(--black);
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+    }
+
+    .facts-aside blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--black);
+      border-left: 2px solid var(--red);
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .facts-aside cite {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-left: 2rem;
+    }
+
+    .facts-aside p {
+      margin-top: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ─── CONTACT ──────────────────────────────────── */
+    #contact {
+      background: var(--mid);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 100%;
+      padding: 7rem 4rem;
+    }
+
+    #contact .heading { margin-bottom: 1rem; }
+
+    #contact p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 44ch;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-row {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-row:first-child { border-top: 1px solid var(--rule); }
+
+    .contact-row-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-row-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a.contact-row-value:hover { color: var(--red); }
+
+    /* ─── FOOTER ───────────────────────────────────── */
+    footer {
+      padding: 1.5rem 4rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SCROLL REVEAL ────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Staggered children */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
+
+    /* ─── RESPONSIVE ───────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 5rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-panel { min-height: 320px; padding: 2.5rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      hr.rule { margin: 0 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 3rem; }
+      .highlights-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      #facts { grid-template-columns: 1fr; gap: 4rem; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.75rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-wordmark">Albania</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#facts">Facts</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <p class="hero-kicker">Discover Albania</p>
+      <h1 class="hero-title">Land of the<br /><em>Eagle</em></h1>
+      <p class="hero-body">A country of ancient cities, Adriatic coastlines, and a culture shaped by millennia of history — largely undiscovered, endlessly rewarding.</p>
+      <a href="#about" class="hero-link">Learn more &rarr;</a>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-number">AL</div>
+      <div class="hero-panel-inner">
+        <p class="hero-panel-label">Shqipëria</p>
+        <p class="hero-panel-quote">"Europe's best kept secret."</p>
+        <p class="hero-panel-attr">— Lonely Planet</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-sidebar reveal">
+      <span class="label">About</span>
+      <h2 class="heading">A small country<br />with a long history</h2>
+      <div class="about-meta">
+        <div class="about-meta-row">
+          <span>Capital</span>
+          <span>Tirana</span>
+        </div>
+        <div class="about-meta-row">
+          <span>Area</span>
+          <span>28,748 km²</span>
+        </div>
+        <div class="about-meta-row">
+          <span>Population</span>
+          <span>2.8 million</span>
+        </div>
+        <div class="about-meta-row">
+          <span>Language</span>
+          <span>Albanian</span>
+        </div>
+        <div class="about-meta-row">
+          <span>NATO member</span>
+          <span>Since 2009</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-body reveal">
+      <p>Albania — known in its own language as <em>Shqipëria</em>, "Land of the Eagles" — occupies a small strip of the western Balkans between the Adriatic and Ionian seas. Despite its size, it holds an extraordinary density of landscape and history: alpine ranges in the north, a sun-bleached riviera in the south, and a central plateau of valleys and plains between them.</p>
+      <p>The country's recorded history stretches back to the ancient Illyrians, and successive waves of Greek, Roman, Byzantine, and Ottoman influence have all left their mark. Two of its cities — Berat and Gjirokastër — are UNESCO World Heritage Sites. The ancient ruins of Butrint, a Roman and Venetian port city on a lagoon near the Greek border, reveal the depth of civilisation that preceded the modern state.</p>
+      <p>Albania declared independence in 1912 and has spent the decades since navigating a turbulent 20th century, including four decades of strict communist isolation under Enver Hoxha. Today it is a candidate for European Union membership and a country in rapid transformation — holding on to its distinctive identity while opening to the world.</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- HIGHLIGHTS -->
+  <section id="highlights">
+    <div class="highlights-header">
+      <div class="reveal">
+        <span class="label">What defines it</span>
+        <h2 class="heading">Three things worth<br />knowing about Albania</h2>
+      </div>
+      <p class="reveal">Albania resists easy categorisation. It is neither purely Mediterranean nor purely Balkan — it is something of its own. These three aspects begin to explain why.</p>
+    </div>
+    <div class="highlights-grid reveal-stagger">
+      <div class="highlight-item">
+        <p class="highlight-num">01</p>
+        <h3 class="highlight-title">Ancient Heritage</h3>
+        <p class="highlight-body">Albania's archaeological record is one of the richest in the region. Butrint, Apollonia, and the castle-cities of Berat and Gjirokastër represent thousands of years of layered civilisation — Illyrian, Greek, Roman, Byzantine, and Ottoman — in a country that most visitors have never considered.</p>
+      </div>
+      <div class="highlight-item">
+        <p class="highlight-num">02</p>
+        <h3 class="highlight-title">The Riviera</h3>
+        <p class="highlight-body">The Albanian Riviera stretches south along the Ionian coast. Its water is clear and cold, its villages are small, and its infrastructure remains light compared to the overdeveloped coasts further north. Himarë, Dhermi, and Ksamil offer a version of the Mediterranean that has largely disappeared elsewhere.</p>
+      </div>
+      <div class="highlight-item">
+        <p class="highlight-num">03</p>
+        <h3 class="highlight-title">Besa</h3>
+        <p class="highlight-body"><em>Besa</em> is an Albanian cultural concept with no direct English equivalent — a sacred promise, a code of honour, an absolute obligation of hospitality. It is not folklore; during the Second World War, hundreds of Albanian families sheltered Jewish refugees at personal risk, guided by this principle.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- FACTS -->
+  <section id="facts">
+    <div class="reveal">
+      <span class="label">By the Numbers</span>
+      <h2 class="heading">Albania at a glance</h2>
+      <ul class="stats-list">
+        <li class="stat-row">
+          <span class="stat-value">28K</span>
+          <span class="stat-label"><strong>Square Kilometres</strong>Roughly the size of Maryland, bordered by Montenegro, Kosovo, North Macedonia, and Greece.</span>
+        </li>
+        <li class="stat-row">
+          <span class="stat-value">476</span>
+          <span class="stat-label"><strong>km of Coastline</strong>Divided between the Adriatic Sea to the west and the Ionian Sea to the southwest.</span>
+        </li>
+        <li class="stat-row">
+          <span class="stat-value">3000</span>
+          <span class="stat-label"><strong>Sunshine Hours Per Year</strong>Among the highest in Europe — the south averages over 300 sunny days annually.</span>
+        </li>
+        <li class="stat-row">
+          <span class="stat-value">1912</span>
+          <span class="stat-label"><strong>Year of Independence</strong>Declared on 28 November, now celebrated as Flag Day — one of the country's most important national holidays.</span>
+        </li>
+      </ul>
+    </div>
+    <div class="facts-aside reveal">
+      <blockquote>"Albania is what happens when you remove a country from history for fifty years and then let it breathe again."</blockquote>
+      <cite>— Traveller account, 2018</cite>
+      <p>Albania's isolation under communism — during which even religion was banned and the country sealed itself from the world — paradoxically preserved much of what makes it unusual today. Its traditions, dialects, and built heritage remained largely intact. The opening came fast: in 1991, thousands fled by ship to Italy. The country has been moving at speed ever since.</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <span class="label">Contact</span>
+      <h2 class="heading">Get in touch</h2>
+      <p>Have questions about Albania, want to share your experience, or simply want to exchange notes? I would be glad to hear from you.</p>
+    </div>
+    <div class="contact-detail reveal">
+      <div class="contact-row">
+        <p class="contact-row-label">Email</p>
+        <a href="mailto:hello@yourdomain.com" class="contact-row-value">hello@yourdomain.com</a>
+      </div>
+      <div class="contact-row">
+        <p class="contact-row-label">Location</p>
+        <p class="contact-row-value">Tirana, Albania</p>
+      </div>
+      <div class="contact-row">
+        <p class="contact-row-label">Language</p>
+        <p class="contact-row-value">Albanian &amp; English</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 &mdash; Albania Through My Eyes</p>
+    <p>Made in Tirana</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
